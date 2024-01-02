@@ -8,10 +8,10 @@ export default {
     BACKGROUND_600: "rgba(62, 59, 71, 1)",
   
   
-
-
     WHITE: "#F4EDE8",
     PINK: "rgba(255, 133, 155, 1)",
+    PINK_100: "#a30540",
+    TAG: "rgba(40, 33, 36, 1)",
 
     GRAY_100: "rgba(148, 143, 153, 1)",
     GRAY_300: "rgba(153, 149, 145, 1)",

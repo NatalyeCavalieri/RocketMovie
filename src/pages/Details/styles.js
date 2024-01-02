@@ -1,11 +1,84 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-display: grid;
-grid-template-rows: 116px auto;
-grid-template-areas: 
-"header" 
-"content";
-width: 100%;
-height: 100vh;
+  display: grid;
+  grid-template-rows: 116px auto;
+  grid-template-areas:
+    "header"
+    "content";
+  width: 100%;
+  height: 100vh;
+
+  /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+    scrollbar-width: auto;
+    scrollbar-color: #fd859b #262529;
+  
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #262529;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #fd859b;
+    border-radius: 10px;
+    border: 3px solid #262529;
+  }
+  > main {
+    grid-area: content;
+    overflow-y: auto;
+    padding: 15px 0;
+  }
+`
+
+export const Content = styled.div`
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 115px;
+ 
+
+  > div {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 40px;
+    margin-top: 24px;
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+
+    svg {
+      color: ${({ theme }) => theme.COLORS.PINK};
+    }
+  }
+
+  h1 {
+    font-size: 36px;
+
+    > svg {
+      color: ${({ theme }) => theme.COLORS.PINK};
+      font-size: 20px;
+      margin-left: 10px;
+    }
+  }
+`
+
+export const Arrow = styled.div`
+
+`
+
+
+export const Text = styled.p`
+display: flex;
+text-align: justify;
+width: 1130px;
+margin-top: 40px;
 `
