@@ -1,5 +1,6 @@
 import { BiSolidCameraMovie } from "react-icons/bi"
 import { Container, Profile, Movie, Search } from "./styles"
+import { Link } from "react-router-dom"
 
 export function Header() {
   return (
@@ -10,15 +11,21 @@ export function Header() {
       </Movie>
 
       <Search>
-        <input type="text" placeholder="Search for title" />
+        <input type="text" placeholder="Pesquisar pelo título" />
       </Search>
 
       <Profile>
         <div>
           <strong>Natalye Cavalieri</strong>
-          <button>Exit</button>
+
+          <button>Sair</button>
         </div>
-        <img src="https://github.com/natalyecavalieri.png" alt="My image" />
+        <Link to="/profile">
+          <img
+            src="https://github.com/natalyecavalieri.png"
+            alt="Imagem do usuário"
+          />
+        </Link>
       </Profile>
     </Container>
   )

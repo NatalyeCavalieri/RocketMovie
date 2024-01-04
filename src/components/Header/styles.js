@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const Container = styled.header`
   grid-area: header;
-  height: 116px;
+  height: 105px;
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.COLORS.BACKGROUND_700};
 
@@ -11,12 +11,16 @@ export const Container = styled.header`
   padding: 0 70px;
 `
 
+
+
 export const Profile = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
 
-  > img {
+
+
+  img {
     width: 70px;
     height: 70px;
   }

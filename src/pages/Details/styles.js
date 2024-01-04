@@ -8,12 +8,12 @@ export const Container = styled.div`
     "content";
   width: 100%;
   height: 100vh;
+  padding-bottom: 20px;
 
   /* ===== Scrollbar CSS ===== */
   /* Firefox */
-    scrollbar-width: auto;
-    scrollbar-color: #fd859b #262529;
-  
+  scrollbar-width: auto;
+  scrollbar-color: #fd859b #262529;
 
   /* Chrome, Edge, and Safari */
   *::-webkit-scrollbar {
@@ -33,6 +33,14 @@ export const Container = styled.div`
     grid-area: content;
     overflow-y: auto;
     padding: 15px 0;
+
+    a {
+      display: flex;
+      color: ${({ theme }) => theme.COLORS.PINK};
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
   }
 `
 
@@ -42,6 +50,7 @@ export const Content = styled.div`
   flex-direction: column;
   margin-left: 115px;
  
+  
 
   > div {
     display: flex;
@@ -69,10 +78,6 @@ export const Content = styled.div`
       margin-left: 10px;
     }
   }
-`
-
-export const Arrow = styled.div`
-
 `
 
 

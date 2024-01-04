@@ -15,6 +15,10 @@ export const Form = styled.form`
   justify-content: center;
   text-align: center;
 
+  > a {
+    color: ${({ theme }) => theme.COLORS.PINK};
+  }
+
   > h1 {
     color: ${({ theme }) => theme.COLORS.PINK};
     font-size: 48px;
@@ -28,7 +32,6 @@ export const Form = styled.form`
   > h3 {
     margin-bottom: 48px;
   }
-
 
   > button {
     width: 340px;

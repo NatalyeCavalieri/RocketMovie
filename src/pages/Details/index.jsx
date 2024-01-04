@@ -1,4 +1,5 @@
-import { Container, Content, Arrow, Text } from "./styles"
+import { Container, Content, Text } from "./styles"
+import { Link } from "react-router-dom"
 import { Header } from "../../components/Header"
 import { Section } from "../../components/Section"
 import { Tag } from "../../components/Tag"
@@ -16,10 +17,10 @@ export function Details() {
 
       <main>
         <Content>
-          <Arrow>
-            <GoArrowLeft />
-            <ButtonText title="Return" />
-          </Arrow>
+          <Link to="/">
+              <GoArrowLeft />
+              <ButtonText title="Voltar" />
+            </Link>
 
           <h1>
             Interestellar
@@ -31,16 +32,19 @@ export function Details() {
           </h1>
 
           <div>
-            <img src="https://github.com/natalyecavalieri.png" alt="My image" />
+            <img
+              src="https://github.com/natalyecavalieri.png"
+              alt="Imagem do usuário"
+            />
             <p>Por Natalye Cavalieri</p>
             <IoTimeOutline />
             <span>31/12/2023 às 09:30</span>
           </div>
 
           <Section>
-            <Tag title="Comedia" />
-            <Tag title="Romance" />
-            <Tag title="Terror" />
+            <Tag title="Ficção Científica" />
+            <Tag title="Drama" />
+            <Tag title="Família" />
           </Section>
 
           <Text>

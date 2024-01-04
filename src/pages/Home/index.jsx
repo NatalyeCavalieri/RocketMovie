@@ -1,4 +1,5 @@
 import { Container, Content, Section, Cards, Tag} from "./styles"
+import { Link } from "react-router-dom"
 import { Header } from "../../components/Header"
 import { Button } from '../../components/Button'
 import { FaStar, FaRegStar } from "react-icons/fa"
@@ -10,9 +11,12 @@ export function Home() {
       <main>
         <Content>
           <Section>
-            <h1>My movies</h1>
-            <Button title="Add movie" />
+            <h1>Meus filmes</h1>
+            <Link to="/new">
+              <Button title="Adicionar filme" />
+            </Link>
           </Section>
+
           <Cards>
             <div>
               <h3>Interestelar</h3>
@@ -55,9 +59,9 @@ export function Home() {
                 Cooper e Amelia descobrem que 23 anos se passaram.
               </p>
               <span>
-                <Tag>Comedia</Tag>
-                <Tag>Romance</Tag>
-                <Tag>Terror</Tag>
+                <Tag>Ficção Científica</Tag>
+                <Tag>Drama</Tag>
+                <Tag>Família</Tag>
               </span>
             </div>
 
@@ -102,9 +106,9 @@ export function Home() {
                 Cooper e Amelia descobrem que 23 anos se passaram.
               </p>
               <span>
-                <Tag>Comedia</Tag>
-                <Tag>Romance</Tag>
-                <Tag>Terror</Tag>
+                <Tag>Ficção Científica</Tag>
+                <Tag>Drama</Tag>
+                <Tag>Família</Tag>
               </span>
             </div>
 
@@ -149,9 +153,9 @@ export function Home() {
                 Cooper e Amelia descobrem que 23 anos se passaram.
               </p>
               <span>
-                <Tag>Comedia</Tag>
-                <Tag>Romance</Tag>
-                <Tag>Terror</Tag>
+                <Tag>Ficção Científica</Tag>
+                <Tag>Drama</Tag>
+                <Tag>Família</Tag>
               </span>
             </div>
           </Cards>

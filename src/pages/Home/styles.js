@@ -8,48 +8,8 @@ export const Container = styled.div`
     "content";
   width: 100%;
   height: 100vh;
+  padding-bottom: 60px;
 
-  > main {
-    grid-area: content;
-    overflow-y: hidden;
-    padding: 15px 0;
-  }
-`
-
-export const Content = styled.div`
-  flex: 1;
-  padding: 15px 0;
-  
-`
-
-export const Section = styled.section`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 50px;
-  margin-bottom: 40px;
-  padding-left: 115px;
-  padding-right: 65px;
-
-  > h1 {
-    font-size: 32px;
-    font-weight: normal;
-  }
-
-  > button {
-    height: 48px;
-    width: 200px;
-    margin: 0;
-    text-align: center;
-  }
-`
-
-export const Cards = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  max-height: 100vh;
-  overflow-y: auto;
   /* ===== Scrollbar CSS ===== */
   /* Firefox */
   scrollbar-width: auto;
@@ -69,6 +29,52 @@ export const Cards = styled.div`
     border-radius: 10px;
     border: 3px solid #262529;
   }
+
+  > main {
+    grid-area: content;
+    overflow-y: scroll;
+    padding: 15px 0;
+
+  }
+`
+
+export const Content = styled.div`
+  flex: 1;
+  padding: 15px 0;
+  
+`
+
+export const Section = styled.section`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  padding-left: 115px;
+  padding-right: 65px;
+  
+
+  > h1 {
+    font-size: 30px;
+    font-weight: normal;
+  }
+
+  > button {
+    height: 48px;
+    width: 200px;
+    margin: 0;
+    text-align: center;
+  }
+`
+
+export const Cards = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-height: 100vh;
+
+
+
 
   > div {
     background-color: ${({ theme }) => theme.COLORS.TAG};
