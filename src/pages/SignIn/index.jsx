@@ -1,12 +1,14 @@
 import { Container, Form, Background } from "./styles"
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import { Input } from "../../components/Input"
 import { Button } from "../../components/Button"
-import { ButtonText } from "../../components/ButtonText"
 import { MdOutlineEmail } from "react-icons/md"
 import { RiLockPasswordFill } from "react-icons/ri"
+import { useAuth } from "../../hooks/auth.jsx"
 
 export function SignIn() {
+  const data = useAuth()
+  console.log("Meu contexto =>", data)
   return (
     <Container>
       <Form>
