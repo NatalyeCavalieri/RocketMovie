@@ -1,8 +1,10 @@
 import { BiSolidCameraMovie } from "react-icons/bi"
 import { Container, Profile, Movie, Search } from "./styles"
 import { Link } from "react-router-dom"
+import { useAuth } from "../../hooks/auth"
 
 export function Header() {
+  const { signOut } = useAuth()
   return (
     <Container>
       <Movie>
@@ -18,7 +20,7 @@ export function Header() {
         <div>
           <strong>Natalye Cavalieri</strong>
 
-          <button>Sair</button>
+          <button onClick={signOut}>Sair</button>
         </div>
         <Link to="/profile">
           <img
