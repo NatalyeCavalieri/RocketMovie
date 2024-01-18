@@ -7,10 +7,23 @@ import { NoteItem } from "../../components/NoteItem"
 import { Button } from "../../components/Button"
 
 import { FiArrowLeft } from "react-icons/fi"
+import { useState } from "react"
 
 
 
 export function New(){
+  const [tags, setTags] = useState([])
+  const [newTag, setNewTag] = useState("")
+
+  function handleAddTag(){
+    setTags(prevState => [...prevState, newTag])
+    setNewTag("")
+  }
+
+  function handleRemoveTag(deleted){
+    setTags(prevState => prevState.filter(tag => tag !== deleted))
+  }
+
   return (
     <Container>
       <Header />
@@ -18,8 +31,8 @@ export function New(){
         <Link to="/">
           <FiArrowLeft />
           Voltar
-          </Link>
-        
+        </Link>
+
         <h1>Novo filme</h1>
         <Form>
           <div>
@@ -35,8 +48,22 @@ export function New(){
         </Form>
         <p>Marcadores</p>
         <NewTag>
-          <NoteItem value="Science Fiction" />
-          <NoteItem isNew placeholder="New Tag" />
+          {
+            tags.map((tag, index) => (
+              <NoteItem 
+              key={String(index)}
+              value={tag}
+              onClick={() =>handleRemoveTag(tag)}
+              />
+            ))
+          }
+          <NoteItem
+            isNew
+            placeholder="New Tag"
+            onChange={(e) => setNewTag(e.target.value)}
+            value={newTag}
+            onClick={handleAddTag}
+          />
         </NewTag>
         <div>
           <Button title="Excluir Filme" variant />
