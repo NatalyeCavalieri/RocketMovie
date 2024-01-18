@@ -2,9 +2,13 @@ import { BiSolidCameraMovie } from "react-icons/bi"
 import { Container, Profile, Movie, Search } from "./styles"
 import { Link } from "react-router-dom"
 import { useAuth } from "../../hooks/auth"
+import { api } from "../../services/api"
 
 export function Header() {
-  const { signOut } = useAuth()
+  const { signOut, user } = useAuth()
+  const avatarUrl = user.avatar
+    ? `${api.defaults.baseURL}/files/${user.avatar}`
+    : avatarPlaceholder
   return (
     <Container>
       <Movie>
@@ -18,15 +22,12 @@ export function Header() {
 
       <Profile>
         <div>
-          <strong>Natalye Cavalieri</strong>
+          <strong>{user.name}</strong>
 
           <button onClick={signOut}>Sair</button>
         </div>
         <Link to="/profile">
-          <img
-            src="https://github.com/natalyecavalieri.png"
-            alt="Imagem do usuário"
-          />
+          <img src={avatarUrl} alt={user.name} />
         </Link>
       </Profile>
     </Container>
