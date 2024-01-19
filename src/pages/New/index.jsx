@@ -8,12 +8,18 @@ import { Button } from "../../components/Button"
 
 import { FiArrowLeft } from "react-icons/fi"
 import { useState } from "react"
+import { api } from '../../services/api'
+import { useNavigate } from "react-router-dom"
 
 
 
 export function New(){
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [rating, setRating] = useState(0)
   const [tags, setTags] = useState([])
   const [newTag, setNewTag] = useState("")
+  const navigate = useNavigate()
 
   function handleAddTag(){
     setTags(prevState => [...prevState, newTag])
@@ -22,6 +28,12 @@ export function New(){
 
   function handleRemoveTag(deleted){
     setTags(prevState => prevState.filter(tag => tag !== deleted))
+  }
+
+  async function handleNewNote(){
+    await api.post("/movie_notes", {title, description, rating, tags})
+    alert("Note created with successful")
+    navigate(-1)
   }
 
   return (
@@ -36,27 +48,33 @@ export function New(){
         <h1>Novo filme</h1>
         <Form>
           <div>
-            <Input type="text" placeholder="Título" />
+            <Input
+              type="text"
+              placeholder="Título"
+              onChange={(e) => setTitle(e.target.value)}
+            />
             <Input
               type="number"
               min="0"
               max="5"
               placeholder="Sua nota (de 0 a 5)"
+              onChange={(e) => setRating(e.target.value)}
             />
           </div>
-          <TextArea placeholder="Observações" />
+          <TextArea
+            placeholder="Description"
+            onChange={(e) => setDescription(e.target.value)}
+          />
         </Form>
-        <p>Marcadores</p>
+        <p>Movie Genre</p>
         <NewTag>
-          {
-            tags.map((tag, index) => (
-              <NoteItem 
+          {tags.map((tag, index) => (
+            <NoteItem
               key={String(index)}
               value={tag}
-              onClick={() =>handleRemoveTag(tag)}
-              />
-            ))
-          }
+              onClick={() => handleRemoveTag(tag)}
+            />
+          ))}
           <NoteItem
             isNew
             placeholder="New Tag"
@@ -67,7 +85,7 @@ export function New(){
         </NewTag>
         <div>
           <Button title="Excluir Filme" variant />
-          <Button title="Salvar alterações" />
+          <Button title="Salvar alterações" onClick={handleNewNote} />
         </div>
       </Content>
     </Container>
