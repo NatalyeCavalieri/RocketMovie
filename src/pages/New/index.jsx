@@ -8,12 +8,10 @@ import { Button } from "../../components/Button"
 
 import { FiArrowLeft } from "react-icons/fi"
 import { useState } from "react"
-import { api } from '../../services/api'
+import { api } from "../../services/api"
 import { useNavigate } from "react-router-dom"
 
-
-
-export function New(){
+export function New() {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [rating, setRating] = useState(0)
@@ -21,17 +19,27 @@ export function New(){
   const [newTag, setNewTag] = useState("")
   const navigate = useNavigate()
 
-  function handleAddTag(){
-    setTags(prevState => [...prevState, newTag])
+  function handleAddTag() {
+    setTags((prevState) => [...prevState, newTag])
     setNewTag("")
   }
 
-  function handleRemoveTag(deleted){
-    setTags(prevState => prevState.filter(tag => tag !== deleted))
+  function handleRemoveTag(deleted) {
+    setTags((prevState) => prevState.filter((tag) => tag !== deleted))
   }
 
-  async function handleNewNote(){
-    await api.post("/movie_notes", {title, description, rating, tags})
+  async function handleNewNote() {
+    if (!title) {
+      return alert("Fill in the field title")
+    }
+    if (!rating) {
+      return alert("Fill in the field rating")
+    }
+    if (newTag) {
+      return alert("Fill in the field genre and don't forget of add the genre ")
+    }
+
+    await api.post("/movie_notes", { title, description, rating, tags })
     alert("Note created with successful")
     navigate(-1)
   }
@@ -77,7 +85,7 @@ export function New(){
           ))}
           <NoteItem
             isNew
-            placeholder="New Tag"
+            placeholder="New genre"
             onChange={(e) => setNewTag(e.target.value)}
             value={newTag}
             onClick={handleAddTag}
