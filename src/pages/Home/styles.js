@@ -1,5 +1,80 @@
 import styled from "styled-components"
 
+export const Header = styled.header`
+  grid-area: header;
+  height: 105px;
+  width: 100%;
+  border-bottom: 1px solid ${({ theme }) => theme.COLORS.BACKGROUND_700};
+
+  display: flex;
+  justify-content: space-between;
+  padding: 0 70px;
+`
+
+export const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    line-height: 24px;
+
+    button {
+      color: ${({ theme }) => theme.COLORS.GRAY_100};
+      font-size: 14px;
+      border: none;
+      background: none;
+    }
+
+    strong {
+      font-size: 16px;
+    }
+  }
+`
+
+export const Search = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  input {
+    background: ${({ theme }) => theme.COLORS.BACKGROUND_700};
+    color: ${({ theme }) => theme.COLORS.GRAY_100};
+    padding: 19px 24px;
+    border-radius: 10px;
+    border: none;
+    width: 630px;
+  }
+`
+
+export const Movie = styled.div`
+  align-items: center;
+  padding: 42px;
+  display: flex;
+
+  > svg {
+    font-size: 24px;
+    color: ${({ theme }) => theme.COLORS.PINK_100};
+  }
+
+  > span {
+    font-size: 24px;
+    font-weight: 700;
+    color: ${({ theme }) => theme.COLORS.PINK};
+    margin-left: 5px;
+  }
+`
+
 export const Container = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
@@ -34,14 +109,12 @@ export const Container = styled.div`
     grid-area: content;
     overflow-y: scroll;
     padding: 15px 0;
-
   }
 `
 
 export const Content = styled.div`
   flex: 1;
   padding: 15px 0;
-  
 `
 
 export const Section = styled.section`
@@ -51,7 +124,6 @@ export const Section = styled.section`
   margin-bottom: 40px;
   padding-left: 115px;
   padding-right: 65px;
-  
 
   > h1 {
     font-size: 30px;
@@ -72,9 +144,7 @@ export const Cards = styled.div`
   gap: 20px;
   width: 100%;
   max-height: 100vh;
-
-
-
+  cursor: pointer;
 
   > div {
     background-color: ${({ theme }) => theme.COLORS.TAG};
@@ -113,4 +183,20 @@ export const Tag = styled.span`
   margin-right: 6px;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_700};
   color: ${({ theme }) => theme.COLORS.WHITE};
+`
+
+export const ListTags = styled.ul`
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0 auto;
+  justify-content: center;
+  li {
+    border: 1px solid ${({ theme }) => theme.COLORS.GRAY_100};
+    background-color: ${({ theme }) => theme.COLORS.TAG};
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
 `

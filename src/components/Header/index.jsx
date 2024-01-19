@@ -4,8 +4,10 @@ import { Link } from "react-router-dom"
 import { useAuth } from "../../hooks/auth"
 import { api } from "../../services/api"
 
+
+
 export function Header() {
-  const { signOut, user } = useAuth()
+   const { signOut, user } = useAuth()
   const avatarUrl = user.avatar
     ? `${api.defaults.baseURL}/files/${user.avatar}`
     : avatarPlaceholder
@@ -17,7 +19,7 @@ export function Header() {
       </Movie>
 
       <Search>
-        <input type="text" placeholder="Pesquisar pelo título" />
+        <input type="text" placeholder="Pesquisar pelo título"/>
       </Search>
 
       <Profile>

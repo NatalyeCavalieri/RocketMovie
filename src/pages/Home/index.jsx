@@ -1,15 +1,112 @@
-import { Container, Content, Section, Cards, Tag} from "./styles"
+import { Container, Content, Section, Cards, Tag, Header, ListTags} from "./styles"
 import { Link } from "react-router-dom"
-import { Header } from "../../components/Header"
 import { Button } from '../../components/Button'
 import { FaStar, FaRegStar } from "react-icons/fa"
+import { BiSolidCameraMovie } from "react-icons/bi"
+import { Profile, Movie, Search } from "./styles"
+import { useAuth } from "../../hooks/auth"
+import { api } from "../../services/api"
+import { useEffect, useState } from "react"
+import { ButtonText } from "../../components/ButtonText"
+import { useNavigate } from "react-router-dom"
+
+
 
 export function Home() {
+  const [tags, setTags] = useState([])
+  const [tagsSelected, setTagsSelected] = useState([])
+ const [ search, setSearch]  = useState("")
+ const [movies, setMovies] = useState([])
+
+ const navigate = useNavigate()
+
+ function handleTagsSelected(tagName){
+   if (tagName === "all") {
+     return setTagsSelected([])
+   }
+  const alreadySelected = tagsSelected.includes(tagName)
+  if(alreadySelected){
+    const filteredTags = tagsSelected.filter( tag=>  tag !== tagName)
+    setTagsSelected(filteredTags)
+  }else{
+    setTagsSelected(prevState => [...prevState, tagName])
+  }
+ }
+
+ function handleDetails(id){
+  navigate(`/details/${id}`)
+ }
+
+ useEffect(()=> {
+  async function fetchTags (){
+    const response = await api.get("/tags")
+    setTags(response.data)
+  }
+  fetchTags()
+ },[])
+
+ useEffect(() => {
+  async function fetchMovies(){
+    const response = await api.get(`/movie_notes?title=${search}&tags=${tagsSelected}`)
+    setMovies(response.data)
+  }
+  fetchMovies()
+ }, [tagsSelected, search])
+
+    const { signOut, user } = useAuth()
+ const avatarUrl = user.avatar
+   ? `${api.defaults.baseURL}/files/${user.avatar}`
+   : avatarPlaceholder
+
   return (
     <Container>
-      <Header />
+      <Header>
+        <Movie>
+          <BiSolidCameraMovie />
+          <span>RocketMovie</span>
+        </Movie>
+
+        <Search>
+          <input
+            type="text"
+            placeholder="Pesquisar pelo título"
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </Search>
+
+        <Profile>
+          <div>
+            <strong>{user.name}</strong>
+
+            <button onClick={signOut}>Sair</button>
+          </div>
+          <Link to="/profile">
+            <img src={avatarUrl} alt={user.name} />
+          </Link>
+        </Profile>
+      </Header>
+
       <main>
         <Content>
+          <ListTags>
+            <li>
+              <ButtonText
+                title="Todos"
+                onClick={() => handleTagsSelected("all")}
+                isActive={tagsSelected.length === 0}
+              />
+            </li>
+            {tags &&
+              tags.map((tag) => (
+                <li key={String(tag.id)}>
+                  <ButtonText
+                    title={tag.name}
+                    onClick={() => handleTagsSelected(tag.name)}
+                    isActive={tagsSelected.includes(tag.name)}
+                  />
+                </li>
+              ))}
+          </ListTags>
           <Section>
             <h1>Meus filmes</h1>
             <Link to="/new">
@@ -18,149 +115,41 @@ export function Home() {
           </Section>
 
           <Cards>
-            <div>
-              <h3>Interestelar</h3>
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaRegStar />
-              <p>
-                Pragas nas colheitas fizeram a civilização humana regredir para
-                uma sociedade agrária em futuro de data desconhecida. Cooper,
-                ex-piloto da NASA, tem uma fazenda com sua família. Murphy, a
-                filha de dez anos de Cooper, acredita que seu quarto está
-                assombrado por um fantasma que tenta se comunicar com ela. Pai e
-                filha descobrem que o "fantasma" é uma inteligência desconhecida
-                que está enviando mensagens codificadas através de radiação
-                gravitacional, deixando coordenadas em binário que os levam até
-                uma instalação secreta da NASA liderada pelo professor John
-                Brand. O cientista revela que um buraco de minhoca foi aberto
-                perto de Saturno e que ele leva a planetas que podem oferecer
-                condições de sobrevivência para a espécie humana. As "missões
-                Lázaro" enviadas anos antes identificaram três planetas
-                potencialmente habitáveis orbitando o buraco negro Gargântua:
-                Miller, Edmunds e Mann – nomeados em homenagem aos astronautas
-                que os pesquisaram. Brand recruta Cooper para pilotar a nave
-                espacial Endurance e recuperar os dados dos astronautas; se um
-                dos planetas se mostrar habitável, a humanidade irá seguir para
-                ele na instalação da NASA, que é na realidade uma enorme estação
-                espacial. A partida de Cooper devasta Murphy. Além de Cooper, a
-                tripulação da Endurance é formada pela bióloga Amelia, filha de
-                Brand; o cientista Romilly, o físico planetário Doyle, além dos
-                robôs TARS e CASE. Eles entram no buraco de minhoca e se dirigem
-                a Miller, porém descobrem que o planeta possui enorme dilatação
-                gravitacional temporal por estar tão perto de Gargântua: cada
-                hora na superfície equivale a sete anos na Terra. Eles entram em
-                Miller e descobrem que é inóspito já que é coberto por um oceano
-                raso e agitado por ondas enormes. Uma onda atinge a tripulação
-                enquanto Amelia tenta recuperar os dados de Miller, matando
-                Doyle e atrasando a partida. Ao voltarem para a Endurance,
-                Cooper e Amelia descobrem que 23 anos se passaram.
-              </p>
-              <span>
-                <Tag>Ficção Científica</Tag>
-                <Tag>Drama</Tag>
-                <Tag>Família</Tag>
-              </span>
-            </div>
-
-            <div>
-              <h3>Interestelar</h3>
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaRegStar />
-              <p>
-                Pragas nas colheitas fizeram a civilização humana regredir para
-                uma sociedade agrária em futuro de data desconhecida. Cooper,
-                ex-piloto da NASA, tem uma fazenda com sua família. Murphy, a
-                filha de dez anos de Cooper, acredita que seu quarto está
-                assombrado por um fantasma que tenta se comunicar com ela. Pai e
-                filha descobrem que o "fantasma" é uma inteligência desconhecida
-                que está enviando mensagens codificadas através de radiação
-                gravitacional, deixando coordenadas em binário que os levam até
-                uma instalação secreta da NASA liderada pelo professor John
-                Brand. O cientista revela que um buraco de minhoca foi aberto
-                perto de Saturno e que ele leva a planetas que podem oferecer
-                condições de sobrevivência para a espécie humana. As "missões
-                Lázaro" enviadas anos antes identificaram três planetas
-                potencialmente habitáveis orbitando o buraco negro Gargântua:
-                Miller, Edmunds e Mann – nomeados em homenagem aos astronautas
-                que os pesquisaram. Brand recruta Cooper para pilotar a nave
-                espacial Endurance e recuperar os dados dos astronautas; se um
-                dos planetas se mostrar habitável, a humanidade irá seguir para
-                ele na instalação da NASA, que é na realidade uma enorme estação
-                espacial. A partida de Cooper devasta Murphy. Além de Cooper, a
-                tripulação da Endurance é formada pela bióloga Amelia, filha de
-                Brand; o cientista Romilly, o físico planetário Doyle, além dos
-                robôs TARS e CASE. Eles entram no buraco de minhoca e se dirigem
-                a Miller, porém descobrem que o planeta possui enorme dilatação
-                gravitacional temporal por estar tão perto de Gargântua: cada
-                hora na superfície equivale a sete anos na Terra. Eles entram em
-                Miller e descobrem que é inóspito já que é coberto por um oceano
-                raso e agitado por ondas enormes. Uma onda atinge a tripulação
-                enquanto Amelia tenta recuperar os dados de Miller, matando
-                Doyle e atrasando a partida. Ao voltarem para a Endurance,
-                Cooper e Amelia descobrem que 23 anos se passaram.
-              </p>
-              <span>
-                <Tag>Ficção Científica</Tag>
-                <Tag>Drama</Tag>
-                <Tag>Família</Tag>
-              </span>
-            </div>
-
-            <div>
-              <h3>Interestelar</h3>
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaRegStar />
-              <p>
-                Pragas nas colheitas fizeram a civilização humana regredir para
-                uma sociedade agrária em futuro de data desconhecida. Cooper,
-                ex-piloto da NASA, tem uma fazenda com sua família. Murphy, a
-                filha de dez anos de Cooper, acredita que seu quarto está
-                assombrado por um fantasma que tenta se comunicar com ela. Pai e
-                filha descobrem que o "fantasma" é uma inteligência desconhecida
-                que está enviando mensagens codificadas através de radiação
-                gravitacional, deixando coordenadas em binário que os levam até
-                uma instalação secreta da NASA liderada pelo professor John
-                Brand. O cientista revela que um buraco de minhoca foi aberto
-                perto de Saturno e que ele leva a planetas que podem oferecer
-                condições de sobrevivência para a espécie humana. As "missões
-                Lázaro" enviadas anos antes identificaram três planetas
-                potencialmente habitáveis orbitando o buraco negro Gargântua:
-                Miller, Edmunds e Mann – nomeados em homenagem aos astronautas
-                que os pesquisaram. Brand recruta Cooper para pilotar a nave
-                espacial Endurance e recuperar os dados dos astronautas; se um
-                dos planetas se mostrar habitável, a humanidade irá seguir para
-                ele na instalação da NASA, que é na realidade uma enorme estação
-                espacial. A partida de Cooper devasta Murphy. Além de Cooper, a
-                tripulação da Endurance é formada pela bióloga Amelia, filha de
-                Brand; o cientista Romilly, o físico planetário Doyle, além dos
-                robôs TARS e CASE. Eles entram no buraco de minhoca e se dirigem
-                a Miller, porém descobrem que o planeta possui enorme dilatação
-                gravitacional temporal por estar tão perto de Gargântua: cada
-                hora na superfície equivale a sete anos na Terra. Eles entram em
-                Miller e descobrem que é inóspito já que é coberto por um oceano
-                raso e agitado por ondas enormes. Uma onda atinge a tripulação
-                enquanto Amelia tenta recuperar os dados de Miller, matando
-                Doyle e atrasando a partida. Ao voltarem para a Endurance,
-                Cooper e Amelia descobrem que 23 anos se passaram.
-              </p>
-              <span>
-                <Tag>Ficção Científica</Tag>
-                <Tag>Drama</Tag>
-                <Tag>Família</Tag>
-              </span>
-            </div>
+            {movies.map(movie => (
+              <div 
+              onClick={()=> handleDetails(movie.id)} 
+              data={movie} 
+              key={String(movie.id)}>
+                <h3> {movie.title} </h3>
+                {renderRatingStars(movie.rating)}
+                <p>{movie.description}</p>
+                <span>
+                  {movie.tags &&
+                    movie.tags.map((tag, index) => (
+                      <Tag key={String(index)}> title={tag} </Tag>
+                    ))}
+                </span>
+              </div>
+            ))}
           </Cards>
         </Content>
       </main>
     </Container>
   )
+}
+function renderRatingStars(rating) {
+  const fullStars = Math.floor(rating)
+  const halfStar = rating % 1 !== 0
+
+  const stars = []
+
+  for (let i = 0; i < fullStars; i++) {
+    stars.push(<FaStar key={i} />)
+  }
+
+  if (halfStar) {
+    stars.push(<FaRegStar key={stars.length} />)
+  }
+
+  return stars
 }
