@@ -19,9 +19,9 @@ export function SignIn() {
   return (
     <Container>
       <Form>
-        <h1>RocketMovies</h1>
-        <p>Aplicação para acompanhar tudo que assistir.</p>
-        <h3>Faça seu login</h3>
+        <h1>MoviesNotes</h1>
+        <p>Application to movies notes that you watched</p>
+        <h3>Do your signIn</h3>
         <Input
           type="text"
           placeholder="Email"
@@ -30,12 +30,12 @@ export function SignIn() {
         />
         <Input
           type="password"
-          placeholder="Senha"
+          placeholder="Password"
           icon={RiLockPasswordFill}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="button" title="Entrar" onClick={handleSignIn} />
-        <Link to="/register">Criar conta</Link>
+        <Button type="button" title="Entry" onClick={handleSignIn} />
+        <Link to="/register">Create account</Link>
       </Form>
       <Background />
     </Container>

@@ -40,12 +40,12 @@ export function SignUp() {
     <Container>
       <Background />
       <Form>
-        <h1>RocketMovies</h1>
-        <p>Aplicação para acompanhar tudo que assistir.</p>
-        <h3>Faça seu login</h3>
+        <h1>MoviesNotes</h1>
+        <p>Application to movies notes that you watched</p>
+        <h3>Create your account</h3>
         <Input
           type="text"
-          placeholder="Nome"
+          placeholder="Name"
           icon={FiUser}
           onChange={(e) => setName(e.target.value)}
         />
@@ -57,13 +57,13 @@ export function SignUp() {
         />
         <Input
           type="password"
-          placeholder="Senha"
+          placeholder="Password"
           icon={RiLockPasswordFill}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="button" title="Cadastrar" onClick={handleSignUp} />
+        <Button type="button" title="Register" onClick={handleSignUp} />
         <Link to="/">
-          <ButtonText title="Voltar para o login" icon={FiArrowLeft} isActive/>
+          <ButtonText title="Return to sigIn" icon={FiArrowLeft} isActive />
         </Link>
       </Form>
     </Container>

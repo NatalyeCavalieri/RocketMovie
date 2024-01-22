@@ -50,22 +50,22 @@ export function New() {
       <Content>
         <Link to="/">
           <FiArrowLeft />
-          Voltar
+          Return
         </Link>
 
-        <h1>Novo filme</h1>
+        <h1>New movie</h1>
         <Form>
           <div>
             <Input
               type="text"
-              placeholder="Título"
+              placeholder="Title"
               onChange={(e) => setTitle(e.target.value)}
             />
             <Input
               type="number"
               min="0"
               max="5"
-              placeholder="Sua nota (de 0 a 5)"
+              placeholder="Rating (from 0 to 5)"
               onChange={(e) => setRating(e.target.value)}
             />
           </div>
@@ -92,7 +92,7 @@ export function New() {
           />
         </NewTag>
         <div>
-          <Button title="Salvar alterações" onClick={handleNewNote} />
+          <Button title="Salve movie" onClick={handleNewNote} />
         </div>
       </Content>
     </Container>

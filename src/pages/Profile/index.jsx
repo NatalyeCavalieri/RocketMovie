@@ -66,7 +66,7 @@ export function Profile() {
         </Avatar>
         <Input
           type="text"
-          placeholder="Nome"
+          placeholder="Name"
           icon={FiUser}
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -80,17 +80,17 @@ export function Profile() {
         />
         <Input
           type="password"
-          placeholder="Senha atual"
+          placeholder="Old password"
           icon={RiLockPasswordLine}
           onChange={(e) => setPasswordOld(e.target.value)}
         />
         <Input
           type="password"
-          placeholder="Nova senha"
+          placeholder="New password"
           icon={RiLockPasswordLine}
           onChange={(e) => setPasswordNew(e.target.value)}
         />
-        <Button type="button" title="Salvar" onClick={handleUpdate} />
+        <Button type="button" title="Save" onClick={handleUpdate} />
       </Form>
     </Container>
   )

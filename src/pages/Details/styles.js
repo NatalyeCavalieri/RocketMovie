@@ -60,24 +60,22 @@ export const Content = styled.div`
     margin-top: 24px;
 
     img {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
     }
 
     svg {
       color: ${({ theme }) => theme.COLORS.PINK};
     }
   }
-
-  h1 {
-    font-size: 36px;
-
+  
     > svg {
       color: ${({ theme }) => theme.COLORS.PINK};
       font-size: 20px;
       margin-left: 10px;
     }
-  }
+  
 `
 
 

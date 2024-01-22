@@ -1,4 +1,4 @@
-import { Container, Content, Section, Cards, Tag, Header, ListTags} from "./styles"
+import { Container, Content, Section, Cards, Header} from "./styles"
 import { Link } from "react-router-dom"
 import { Button } from '../../components/Button'
 import { FaStar, FaRegStar } from "react-icons/fa"
@@ -7,52 +7,35 @@ import { Profile, Movie, Search } from "./styles"
 import { useAuth } from "../../hooks/auth"
 import { api } from "../../services/api"
 import { useEffect, useState } from "react"
-import { ButtonText } from "../../components/ButtonText"
 import { useNavigate } from "react-router-dom"
 import avatarPlaceholder from "../../assets/avatar.svg"
+import { Tag } from '../../components/Tag'
 
 
 
 export function Home() {
-  const [tags, setTags] = useState([])
-  const [tagsSelected, setTagsSelected] = useState([])
+
  const [ search, setSearch]  = useState("")
  const [movies, setMovies] = useState([])
 
+
  const navigate = useNavigate()
 
- function handleTagsSelected(tagName){
-   if (tagName === "all") {
-     return setTagsSelected([])
-   }
-  const alreadySelected = tagsSelected.includes(tagName)
-  if(alreadySelected){
-    const filteredTags = tagsSelected.filter( tag=>  tag !== tagName)
-    setTagsSelected(filteredTags)
-  }else{
-    setTagsSelected(prevState => [...prevState, tagName])
-  }
- }
 
  function handleDetails(id){
   navigate(`/details/${id}`)
  }
 
- useEffect(()=> {
-  async function fetchTags (){
-    const response = await api.get("/tags")
-    setTags(response.data)
-  }
-  fetchTags()
- },[])
+
 
  useEffect(() => {
   async function fetchMovies(){
-    const response = await api.get(`/movie_notes?title=${search}&tags=${tagsSelected}`)
-    setMovies(response.data)
+    const response = await api.get(
+      `/movie_notes?title=${search}`)
+      setMovies(response.data)
   }
   fetchMovies()
- }, [tagsSelected, search])
+ }, [search])
 
     const { signOut, user } = useAuth()
  const avatarUrl = user.avatar
@@ -64,13 +47,13 @@ export function Home() {
       <Header>
         <Movie>
           <BiSolidCameraMovie />
-          <span>RocketMovie</span>
+          <span>MovieNotes</span>
         </Movie>
 
         <Search>
           <input
             type="text"
-            placeholder="Pesquisar pelo título"
+            placeholder="Search by title"
             onChange={(e) => setSearch(e.target.value)}
           />
         </Search>
@@ -79,7 +62,7 @@ export function Home() {
           <div>
             <strong>{user.name}</strong>
 
-            <button onClick={signOut}>Sair</button>
+            <button onClick={signOut}>Exit</button>
           </div>
           <Link to="/profile">
             <img src={avatarUrl} alt={user.name} />
@@ -89,47 +72,26 @@ export function Home() {
 
       <main>
         <Content>
-          <ListTags>
-            <li>
-              <ButtonText
-                title="Todos"
-                onClick={() => handleTagsSelected("all")}
-                isActive={tagsSelected.length === 0}
-              />
-            </li>
-            {tags &&
-              tags.map((tag) => (
-                <li key={String(tag.id)}>
-                  <ButtonText
-                    title={tag.name}
-                    onClick={() => handleTagsSelected(tag.name)}
-                    isActive={tagsSelected.includes(tag.name)}
-                  />
-                </li>
-              ))}
-          </ListTags>
           <Section>
-            <h1>Meus filmes</h1>
             <Link to="/new">
-              <Button title="Adicionar filme" />
+              <Button title="Add movie" />
             </Link>
           </Section>
 
           <Cards>
-            {movies.map(movie => (
-              <div 
-              onClick={()=> handleDetails(movie.id)} 
-              data={movie} 
-              key={String(movie.id)}>
+            {movies.map((movie) => (
+              <div
+                onClick={() => handleDetails(movie.id)}
+                data={movie.id}
+                key={String(movie.id)}
+              >
                 <h3> {movie.title} </h3>
                 {renderRatingStars(movie.rating)}
                 <p>{movie.description}</p>
-                <span>
-                  {movie.tags &&
-                    movie.tags.map((tag, index) => (
-                      <Tag key={String(index)}> title={tag} </Tag>
-                    ))}
-                </span>
+         
+               <Tag  />
+    
+             
               </div>
             ))}
           </Cards>
@@ -138,7 +100,7 @@ export function Home() {
     </Container>
   )
 }
-function renderRatingStars(rating) {
+export function renderRatingStars(rating) {
   const fullStars = Math.floor(rating)
   const halfStar = rating % 1 !== 0
 

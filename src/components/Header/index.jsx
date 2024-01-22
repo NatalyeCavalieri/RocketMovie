@@ -19,22 +19,23 @@ export function Header() {
   const avatarUrl = user.avatar
     ? `${api.defaults.baseURL}/files/${user.avatar}`
     : avatarPlaceholder
+
   return (
     <Container>
       <Movie>
         <BiSolidCameraMovie />
-        <span>RocketMovie</span>
+        <span>MovieNotes</span>
       </Movie>
 
       <Search>
-        <input type="text" placeholder="Pesquisar pelo título" />
+        <input type="text" placeholder="Search by title" />
       </Search>
 
       <Profile>
         <div>
           <strong>{user.name}</strong>
 
-          <button onClick={handleSignOut}>Sair</button>
+          <button onClick={handleSignOut}>Exit</button>
         </div>
         <Link to="/profile">
           <img src={avatarUrl} alt={user.name} />
