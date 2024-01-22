@@ -107,7 +107,7 @@ export function renderRatingStars(rating) {
   const stars = []
 
   for (let i = 0; i < fullStars; i++) {
-    stars.push(<FaStar key={i} />)
+    stars.push(<FaStar key={i}/>)
   }
 
   if (halfStar) {

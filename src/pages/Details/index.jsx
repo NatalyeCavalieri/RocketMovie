@@ -11,6 +11,7 @@ import { useState, useEffect } from "react"
 import { api } from '../../services/api'
 import { renderRatingStars } from "../Home/index"
 import { useAuth } from "../../hooks/auth"
+import avatarPlaceholder from "../../assets/avatar.svg"
 
 
 
@@ -49,7 +50,7 @@ export function Details() {
           <Content>
             <Link to="/">
               <GoArrowLeft />
-              <ButtonText isActive title="Voltar" />
+              <ButtonText isActive title="Return" />
             </Link>
 
             <h1>
@@ -71,7 +72,7 @@ export function Details() {
             )}
 
             <Text>{data.description}</Text>
-            <Button title="Excluir Filme" variant onClick={handleRemove} />
+            <Button title="Delete movie" variant onClick={handleRemove} />
           </Content>
         </main>
       )}

@@ -49,8 +49,6 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 115px;
- 
-  
 
   > div {
     display: flex;
@@ -65,17 +63,16 @@ export const Content = styled.div`
       border-radius: 50%;
     }
 
-    svg {
-      color: ${({ theme }) => theme.COLORS.PINK};
-    }
-  }
   
+  }
+
+  h1{
     > svg {
       color: ${({ theme }) => theme.COLORS.PINK};
       font-size: 20px;
       margin-left: 10px;
     }
-  
+  }
 `
 
 

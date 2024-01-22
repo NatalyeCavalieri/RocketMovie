@@ -49,7 +49,7 @@ export function Profile() {
       <header>
         <a href="/">
           <FiArrowLeft />
-          Voltar
+          Return
         </a>
       </header>
 
