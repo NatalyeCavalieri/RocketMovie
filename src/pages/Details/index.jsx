@@ -1,5 +1,5 @@
 import { Container, Content, Text } from "./styles"
-import { Link } from "react-router-dom"
+import { Link, useNavigate} from "react-router-dom"
 import { Header } from "../../components/Header"
 import { Section } from "../../components/Section"
 import { Button } from "../../components/Button"
@@ -14,10 +14,20 @@ import { api } from '../../services/api'
 
 
 
+
 export function Details() {
   const [data, setData] = useState(null)
 
   const params = useParams()
+  const navigate = useNavigate()
+
+  async function handleRemove(){
+    const confirm = window.confirm("Would you really like to delete the movie?")
+    if(confirm){
+      await api.delete(`/movie_notes/${params.id}`)
+      navigate(-1)
+    }
+  }
 
   useEffect(()=> {
     async function fetchMovie(){
@@ -66,7 +76,7 @@ export function Details() {
             )}
 
             <Text>{data.description}</Text>
-            <Button title="Excluir Filme" variant />
+            <Button title="Excluir Filme" variant onClick={handleRemove} />
           </Content>
         </main>
       )}
