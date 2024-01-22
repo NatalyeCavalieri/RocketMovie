@@ -45,7 +45,7 @@ export function Details() {
           <Content>
             <Link to="/">
               <GoArrowLeft />
-              <ButtonText title="Voltar" />
+              <ButtonText isActive title="Voltar" />
             </Link>
 
             <h1>

@@ -63,7 +63,7 @@ export function SignUp() {
         />
         <Button type="button" title="Cadastrar" onClick={handleSignUp} />
         <Link to="/">
-          <ButtonText title="Voltar para o login" icon={FiArrowLeft} />
+          <ButtonText title="Voltar para o login" icon={FiArrowLeft} isActive/>
         </Link>
       </Form>
     </Container>

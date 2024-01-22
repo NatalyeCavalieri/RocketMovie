@@ -9,6 +9,7 @@ import { api } from "../../services/api"
 import { useEffect, useState } from "react"
 import { ButtonText } from "../../components/ButtonText"
 import { useNavigate } from "react-router-dom"
+import avatarPlaceholder from "../../assets/avatar.svg"
 
 
 

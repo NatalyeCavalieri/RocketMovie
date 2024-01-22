@@ -7,7 +7,7 @@ import { MdOutlineEmail } from "react-icons/md"
 import { RiLockPasswordLine } from "react-icons/ri"
 import { useState } from "react"
 import {useAuth} from '../../hooks/auth'
-import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
+import avatarPlaceholder from '../../assets/avatar.svg'
 import { api } from '../../services/api'
 
 
@@ -15,22 +15,25 @@ export function Profile() {
   const { user, updateProfile } = useAuth()
   const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
-  const [passwordOld, setPasswordOld] = useState()
-  const [passwordNew, setPasswordNew] = useState()
+  const [passwordOld, setPasswordOld] = useState("")
+  const [passwordNew, setPasswordNew] = useState("")
 
-  const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
+  const avatarUrl = user.avatar
+    ? `${api.defaults.baseURL}/files/${user.avatar}`
+    : avatarPlaceholder
   const [avatar, setAvatar] = useState(avatarUrl)
   const [avatarFile, setAvatarFile] = useState(null)
 
   async function handleUpdate(){
-    const user = {
+    const updated = {
       name,
       email,
       password: passwordNew,
       old_password: passwordOld
     }
-
-  await updateProfile({ user, avatarFile })
+    const userUpdated = Object.assign(user, updated)
+  
+    await updateProfile({ user: userUpdated, avatarFile })
   }
 
   async function handleChangeAvatar(event){
