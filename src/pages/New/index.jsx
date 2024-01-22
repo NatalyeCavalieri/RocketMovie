@@ -92,7 +92,6 @@ export function New() {
           />
         </NewTag>
         <div>
-          <Button title="Excluir Filme" variant />
           <Button title="Salvar alterações" onClick={handleNewNote} />
         </div>
       </Content>
